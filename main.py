@@ -27,7 +27,7 @@ class APP(QtWidgets.QDialog, Ui_Dialog):
         host = self.ip_address_txt.text()
         open_ports = []
         try:
-            if check_ip_address(self.ip_address_txt.text()):
+            if check_ip_address(host):
                 host = self.ip_address_txt.text()
 
                 for port in range(int(self.start_port_txt.text()), int(self.end_port_txt.text())):
@@ -35,10 +35,13 @@ class APP(QtWidgets.QDialog, Ui_Dialog):
                         s = socket.socket()
                         s.connect((host, port))
                     except:
-                        result.emit(f"{host:15}:{port:5} is closed ")
+                        result.emit(f"{host:15}:{port:5}  [closed] ")
 
                     else:
-                        result.emit(f"{host:15}:{port:5} is open")
+                        redText = "<span style=\" color:#ff0000;\" >"
+                        redText += f"{host:15}:{port:5} is [open]"
+                        redText += "</span>"
+                        result.emit(redText)
                         open_ports.append(port)
 
                 result.emit(f'{len(open_ports)} Ports Open  : {open_ports}')

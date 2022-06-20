@@ -10,11 +10,12 @@ regex_ip = '''^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(
             25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.( 
             25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)'''
 
-#Functions
+
+# Functions
 
 
 def check_ip_address(ip):
-    if re.search(regex_ip, ip):  
+    if re.search(regex_ip, ip):
         return True
 
 
@@ -52,5 +53,3 @@ class Worker(QtCore.QRunnable):
             self.signals.result.emit(result)
         finally:
             self.signals.finished.emit()
-
-
