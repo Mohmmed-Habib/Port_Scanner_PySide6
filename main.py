@@ -1,7 +1,6 @@
 import sys
-import time
 import socket
-from PySide6 import QtWidgets, QtCore, QtGui
+from PySide6 import QtWidgets, QtCore
 from gui import Ui_Dialog
 from tools import Worker, check_ip_address
 
@@ -23,7 +22,6 @@ class APP(QtWidgets.QDialog, Ui_Dialog):
         worker.signals.finished.connect(self.thread_complete)
         self.threadpool.start(worker)
 
-
     def scanner(self, result):
         self.btn_scan.setEnabled(False)
         host = self.ip_address_txt.text()
@@ -31,7 +29,7 @@ class APP(QtWidgets.QDialog, Ui_Dialog):
         try:
             if check_ip_address(self.ip_address_txt.text()):
                 host = self.ip_address_txt.text()
-                
+
                 for port in range(int(self.start_port_txt.text()), int(self.end_port_txt.text())):
                     try:
                         s = socket.socket()
@@ -49,7 +47,7 @@ class APP(QtWidgets.QDialog, Ui_Dialog):
 
         except Exception as e:
             result.emit(str(f'[Error] : {e}'))
-    
+
     def show_result(self, log):
         self.textBrowser.append(log)
 
