@@ -23,6 +23,7 @@ class APP(QtWidgets.QDialog, Ui_Dialog):
         self.threadpool.start(worker)
 
     def scanner(self, result):
+        self.textBrowser.clear()
         self.btn_scan.setEnabled(False)
         host = self.ip_address_txt.text()
         open_ports = []
